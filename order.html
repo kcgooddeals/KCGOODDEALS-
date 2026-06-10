@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>KC GoodDeals – Place Order</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --teal:#1F4E6B;--teal2:#2a6a91;--gold:#C9A84C;
+  --green:#1A6B3C;--red:#C0392B;--orange:#E67E22;
+  --bg:#F4F7FA;--gray:#6B7280;--border:#E2E8F0;--text:#1A2B35;
+}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:50px;}
+.hdr{background:linear-gradient(135deg,#1F4E6B,#2a6a91);color:white;padding:20px 16px 16px;text-align:center;}
+.hdr h1{font-size:22px;font-weight:800;letter-spacing:1px;margin-top:6px;}
+.hdr p{font-size:12px;opacity:.8;margin-top:4px;}
+.secure{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.15);border-radius:20px;padding:5px 14px;font-size:11px;margin-top:10px;font-weight:600;}
+.prog{background:white;padding:14px 16px 10px;position:sticky;top:0;z-index:50;box-shadow:0 2px 6px rgba(0,0,0,.07);}
+.prog-row{display:flex;align-items:center;justify-content:center;}
+.pc{width:30px;height:30px;border-radius:50%;border:2px solid #E2E8F0;background:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#9CA3AF;flex-shrink:0;transition:all .3s;}
+.pc.active{background:#1F4E6B;border-color:#1F4E6B;color:white;}
+.pc.done{background:#1A6B3C;border-color:#1A6B3C;color:white;}
+.pl{width:28px;height:2px;background:#E2E8F0;transition:background .3s;}
+.pl.done{background:#1A6B3C;}
+.sl-row{display:flex;justify-content:space-around;padding:5px 0 0;}
+.sl{font-size:9px;color:#9CA3AF;font-weight:600;text-transform:uppercase;letter-spacing:.3px;text-align:center;width:58px;}
+.sec{display:none;padding:16px;}
+.sec.active{display:block;}
+.card{background:white;border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.07);}
+.ctitle{font-size:15px;font-weight:800;color:#1F4E6B;margin-bottom:14px;}
+.fld{margin-bottom:14px;}
+.fld label{display:block;font-size:11px;font-weight:700;color:#6B7280;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px;}
+.fld input,.fld select{width:100%;padding:13px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:15px;color:#1A2B35;outline:none;background:white;-webkit-appearance:none;}
+.fld input:focus,.fld select:focus{border-color:#1F4E6B;}
+.hint{font-size:11px;color:#6B7280;margin-top:5px;font-style:italic;}
+.req{color:#C0392B;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.item-box{background:#F8FAFC;border-radius:12px;padding:14px;margin-bottom:10px;border:1.5px solid #E2E8F0;position:relative;}
+.rm-btn{position:absolute;top:10px;right:10px;background:#FDECEA;border:none;color:#C0392B;font-size:13px;font-weight:700;cursor:pointer;padding:4px 10px;border-radius:6px;}
+.add-btn{width:100%;padding:13px;background:#F0F7FF;border:2px dashed #1F4E6B;border-radius:10px;color:#1F4E6B;font-size:14px;font-weight:700;cursor:pointer;margin-bottom:4px;}
+.tot-box{background:#1F4E6B;color:white;border-radius:14px;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.tot-box .tl{font-size:11px;opacity:.8;}
+.tot-box .ta{font-size:24px;font-weight:800;}
+.ship-opt{border:2px solid #E2E8F0;border-radius:14px;padding:14px;margin-bottom:10px;cursor:pointer;background:white;transition:all .2s;}
+.ship-opt.sel{border-color:#1F4E6B;background:#F0F7FF;}
+.ship-title{font-size:14px;font-weight:700;margin-bottom:4px;}
+.ship-desc{font-size:12px;color:#6B7280;line-height:1.6;}
+.sbadge{display:inline-block;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:700;margin-left:6px;}
+.sb-g{background:#D5F5E3;color:#1A6B3C;}
+.sb-b{background:#D6EAF8;color:#1F4E6B;}
+.pin-box{background:#FFFBEB;border:1.5px solid #C9A84C;border-radius:12px;padding:14px;margin-bottom:14px;}
+.pin-box p{font-size:13px;color:#78350F;line-height:1.8;}
+.pin-title{font-size:13px;font-weight:700;color:#92400E;margin-bottom:6px;}
+.pay-pills{display:flex;gap:8px;margin-bottom:14px;}
+.ppill{flex:1;padding:12px 6px;border-radius:12px;border:2px solid #E2E8F0;background:white;text-align:center;cursor:pointer;font-size:12px;font-weight:700;line-height:1.4;transition:all .2s;}
+.ppill.sf{background:#D5F5E3;border-color:#1A6B3C;color:#1A6B3C;}
+.ppill.sd{background:#FEF3E2;border-color:#E67E22;color:#E67E22;}
+.due-box{background:#1F4E6B;color:white;border-radius:14px;padding:16px 18px;text-align:center;margin-bottom:14px;}
+.due-box .dl{font-size:11px;opacity:.8;margin-bottom:4px;}
+.due-box .da{font-size:28px;font-weight:800;}
+.due-box .dn{font-size:11px;opacity:.7;margin-top:5px;}
+.bal-note{background:#FEF3E2;border:1.5px solid #E67E22;border-radius:12px;padding:13px;margin-bottom:14px;font-size:13px;color:#92400E;line-height:1.6;}
+.pay-info{background:#FFFBEB;border:1.5px solid #C9A84C;border-radius:12px;padding:14px;margin-bottom:14px;}
+.pay-info-title{font-size:12px;font-weight:700;color:#92400E;margin-bottom:8px;}
+.pay-info-body{font-size:14px;line-height:1.9;}
+.chk-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #F1F5F9;cursor:pointer;}
+.chk-item:last-child{border:none;}
+.chk-circle{width:28px;height:28px;border-radius:50%;border:2px solid #E2E8F0;background:white;display:flex;align-items:center;justify-content:center;font-size:14px;color:transparent;flex-shrink:0;transition:all .2s;}
+.chk-circle.on{background:#1A6B3C;border-color:#1A6B3C;color:white;}
+.chk-text{font-size:13px;font-weight:500;flex:1;line-height:1.4;}
+.warn-box{display:none;background:#FDECEA;border-radius:10px;padding:12px;margin-top:12px;font-size:13px;color:#C0392B;font-weight:600;text-align:center;}
+.how-box{background:#F0FDF4;border:1.5px solid #86EFAC;border-radius:12px;padding:14px;margin-bottom:14px;font-size:13px;color:#166534;line-height:1.8;}
+.sum-hdr{background:linear-gradient(135deg,#1F4E6B,#2a6a91);color:white;border-radius:14px;padding:18px;text-align:center;margin-bottom:14px;}
+.sum-hdr h2{font-size:17px;font-weight:800;margin-top:6px;}
+.sum-hdr p{font-size:11px;opacity:.75;margin-top:3px;}
+.slbl{font-size:10px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+.sval{font-size:14px;font-weight:600;margin-bottom:10px;}
+.div{height:1px;background:#F1F5F9;margin:12px 0;}
+.si{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #F1F5F9;font-size:13px;}
+.si:last-child{border:none;}
+.si-n{flex:1;font-weight:600;padding-right:8px;}
+.si-p{font-weight:700;color:#1F4E6B;white-space:nowrap;}
+.badge{display:inline-block;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:700;}
+.bg{background:#D5F5E3;color:#1A6B3C;}
+.bo{background:#FEF3E2;color:#E67E22;}
+.bt{background:#D6EAF8;color:#1F4E6B;}
+.br{background:#FDECEA;color:#C0392B;}
+.btn-next{width:100%;padding:15px;background:#1F4E6B;color:white;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;margin-bottom:8px;}
+.btn-back{width:100%;padding:12px;background:white;color:#6B7280;border:1.5px solid #E2E8F0;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:8px;}
+.btn-send{width:100%;padding:16px;background:#006AFF;color:white;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:8px;}
+.btn-new{width:100%;padding:12px;background:#F4F7FA;color:#1F4E6B;border:1.5px solid #1F4E6B;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;}
+.send-note{text-align:center;font-size:12px;color:#6B7280;margin-bottom:14px;padding:0 8px;line-height:1.6;}
+.fallback{text-align:center;margin-bottom:14px;}
+.fallback a{font-size:13px;color:#1F4E6B;font-weight:600;}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div style="font-size:30px">🇵🇭</div>
+  <h1>KC GOODDEALS</h1>
+  <p>100% Authentic UAE Perfumes • Nationwide Delivery</p>
+  <div class="secure">🔒 Secure Order Form • www.kcgooddeals.com</div>
+</div>
+
+<div class="prog">
+  <div class="prog-row">
+    <div class="pc active" id="pc1">1</div>
+    <div class="pl" id="pl1"></div>
+    <div class="pc" id="pc2">2</div>
+    <div class="pl" id="pl2"></div>
+    <div class="pc" id="pc3">3</div>
+    <div class="pl" id="pl3"></div>
+    <div class="pc" id="pc4">4</div>
+    <div class="pl" id="pl4"></div>
+    <div class="pc" id="pc5">5</div>
+  </div>
+  <div class="sl-row">
+    <div class="sl">My Info</div>
+    <div class="sl">Items</div>
+    <div class="sl">Shipping</div>
+    <div class="sl">Payment</div>
+    <div class="sl">Confirm</div>
+  </div>
+</div>
+
+<!-- STEP 1 -->
+<div class="sec active" id="step1">
+  <div class="card">
+    <div class="ctitle">👤 Your Information</div>
+    <div class="fld">
+      <label>Full Name <span class="req">*</span></label>
+      <input id="f-name" type="text" placeholder="Enter your full name" autocomplete="name">
+    </div>
+    <div class="fld">
+      <label>Facebook Name / Messenger <span class="req">*</span></label>
+      <input id="f-fb" type="text" placeholder="Your Facebook name">
+      <div class="hint">💬 We will send your order updates here</div>
+    </div>
+    <div class="fld">
+      <label>Mobile Number (optional)</label>
+      <input id="f-phone" type="tel" placeholder="e.g. 09xxxxxxxxx" autocomplete="tel">
+    </div>
+  </div>
+  <button class="btn-next" onclick="next(1)">Next: My Order ➜</button>
+</div>
+
+<!-- STEP 2 -->
+<div class="sec" id="step2">
+  <div class="card">
+    <div class="ctitle">🛒 Items Ordered</div>
+    <p style="font-size:13px;color:#6B7280;margin-bottom:14px">Enter items and prices as agreed with KC GoodDeals 😊</p>
+    <div id="items-list"></div>
+    <button class="add-btn" onclick="addItem()">+ Add Another Item</button>
+  </div>
+  <div class="tot-box">
+    <div><div class="tl">ORDER TOTAL</div></div>
+    <div class="ta" id="tot-amt">₱0</div>
+  </div>
+  <button class="btn-next" onclick="next(2)">Next: Shipping ➜</button>
+  <button class="btn-back" onclick="back(1)">← Back</button>
+</div>
+
+<!-- STEP 3 -->
+<div class="sec" id="step3">
+  <div class="card">
+    <div class="ctitle">🚚 Delivery Details</div>
+    <div class="fld"><label>Where are you located? <span class="req">*</span></label></div>
+    <div class="ship-opt" id="ship-mm" onclick="setZone('metro')">
+      <div class="ship-title">🏙️ Metro Manila <span class="sbadge sb-g">Customer Books Rider</span></div>
+      <div class="ship-desc">You book <b>Lalamove or Grab Express</b> yourself.<br>After payment, we send you our <b>PIN location</b> on Messenger. 📍</div>
+    </div>
+    <div class="ship-opt" id="ship-prov" onclick="setZone('prov')">
+      <div class="ship-title">🌍 Outside Metro Manila <span class="sbadge sb-b">J&T / LBC</span></div>
+      <div class="ship-desc">We ship via <b>J&T Express or LBC</b>.<br>Please fill in your complete address below. 📦</div>
+    </div>
+  </div>
+
+  <div id="metro-card" style="display:none">
+    <div class="card">
+      <div class="ctitle">📍 Metro Manila</div>
+      <div class="pin-box">
+        <div class="pin-title">📌 How it works:</div>
+        <p>1. Complete this form and pay<br>2. We confirm on Messenger<br>3. We send our <b>exact PIN location</b><br>4. You book Lalamove or Grab 🛵</p>
+      </div>
+      <div class="fld">
+        <label>Preferred Courier <span class="req">*</span></label>
+        <select id="metro-courier">
+          <option value="">-- Select --</option>
+          <option value="Lalamove">🟡 Lalamove</option>
+          <option value="Grab Express">🟢 Grab Express</option>
+        </select>
+      </div>
+      <div class="fld">
+        <label>Your City / Area <span class="req">*</span></label>
+        <input id="metro-city" placeholder="e.g. Quezon City, Makati, Pasig...">
+      </div>
+    </div>
+  </div>
+
+  <div id="prov-card" style="display:none">
+    <div class="card">
+      <div class="ctitle">📦 Complete Delivery Address</div>
+      <div class="fld">
+        <label>Preferred Courier <span class="req">*</span></label>
+        <select id="prov-courier" onchange="toggleLBC()">
+          <option value="">-- Select --</option>
+          <option value="J&T Express">📦 J&T Express</option>
+          <option value="LBC – Door to Door">🔴 LBC – Door to Door</option>
+          <option value="LBC – Branch Pick-up">🔴 LBC – Branch Pick-up</option>
+        </select>
+      </div>
+      <div id="lbc-field" style="display:none">
+        <div class="fld">
+          <label>Nearest LBC Branch <span class="req">*</span></label>
+          <input id="lbc-branch" placeholder="e.g. LBC SM City Cebu">
+        </div>
+      </div>
+      <div class="fld">
+        <label>House No. / Street / Barangay <span class="req">*</span></label>
+        <input id="prov-street" placeholder="e.g. 123 Rizal St, Brgy. San Jose">
+      </div>
+      <div class="frow">
+        <div class="fld"><label>City / Municipality <span class="req">*</span></label><input id="prov-city" placeholder="City"></div>
+        <div class="fld"><label>Province <span class="req">*</span></label><input id="prov-prov" placeholder="Province"></div>
+      </div>
+      <div class="frow">
+        <div class="fld"><label>ZIP Code</label><input id="prov-zip" type="number" placeholder="e.g. 1234"></div>
+        <div class="fld"><label>Landmark (optional)</label><input id="prov-lm" placeholder="near SM..."></div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-next" onclick="next(3)">Next: Payment ➜</button>
+  <button class="btn-back" onclick="back(2)">← Back</button>
+</div>
+
+<!-- STEP 4 -->
+<div class="sec" id="step4">
+  <div class="card">
+    <div class="ctitle">💳 Payment</div>
+    <div class="fld">
+      <label>Payment Type <span class="req">*</span></label>
+      <div class="pay-pills">
+        <div class="ppill" id="pp-full" onclick="setPayType('full')">✅ Full Payment<br><span style="font-size:10px;opacity:.7">On-Hand PH</span></div>
+        <div class="ppill" id="pp-dep" onclick="setPayType('dep')">💰 50% Deposit<br><span style="font-size:10px;opacity:.7">Preorder</span></div>
+      </div>
+    </div>
+    <div class="due-box">
+      <div class="dl" id="due-lbl">AMOUNT DUE NOW</div>
+      <div class="da" id="due-amt">₱0</div>
+      <div class="dn" id="due-note"></div>
+    </div>
+    <div class="bal-note" id="bal-note" style="display:none">
+      ⚠️ <b>Balance:</b> Remaining 50% collected when item arrives in PH. We will message you on Messenger. ✈️
+    </div>
+    <div class="fld">
+      <label>Pay Via <span class="req">*</span></label>
+      <select id="pay-method" onchange="showPayInfo()">
+        <option value="">-- Select Payment Method --</option>
+        <option value="GCash">📱 GCash</option>
+        <option value="BDO">🏦 BDO Bank Transfer</option>
+        <option value="BPI">🏦 BPI Bank Transfer</option>
+      </select>
+    </div>
+    <div id="pay-info-box" style="display:none">
+      <div class="pay-info">
+        <div class="pay-info-title">📲 Send payment to:</div>
+        <div class="pay-info-body" id="pay-info-body"></div>
+        <div style="font-size:12px;color:#6B7280;margin-top:10px">Enter your reference number below after sending 👇</div>
+      </div>
+      <div class="fld">
+        <label>Reference / Transaction Number <span class="req">*</span></label>
+        <input id="f-ref" placeholder="GCash ref # / Bank transaction #" autocomplete="off">
+      </div>
+    </div>
+  </div>
+  <button class="btn-next" onclick="next(4)">Next: Confirm ➜</button>
+  <button class="btn-back" onclick="back(3)">← Back</button>
+</div>
+
+<!-- STEP 5 -->
+<div class="sec" id="step5">
+  <!-- Summary -->
+  <div class="card">
+    <div class="sum-hdr">
+      <div style="font-size:28px">🇵🇭</div>
+      <h2>KC GOODDEALS</h2>
+      <p>www.kcgooddeals.com</p>
+    </div>
+    <div class="slbl">👤 Customer</div>
+    <div class="sval" id="sum-name">—</div>
+    <div style="font-size:12px;color:#6B7280;margin-bottom:10px" id="sum-contact">—</div>
+    <div class="div"></div>
+    <div class="slbl">🚚 Delivery</div>
+    <div class="sval" id="sum-delivery">—</div>
+    <div style="font-size:12px;color:#6B7280;margin-bottom:10px" id="sum-courier">—</div>
+    <div class="div"></div>
+    <div class="slbl">🛒 Items</div>
+    <div id="sum-items">—</div>
+    <div class="div"></div>
+    <div class="slbl">💳 Payment</div>
+    <div class="sval" id="sum-pay">—</div>
+    <div style="font-size:12px;color:#6B7280">Ref #: <span id="sum-ref">—</span></div>
+    <div style="margin-top:6px" id="sum-amounts">—</div>
+  </div>
+
+  <!-- Checklist -->
+  <div class="card">
+    <div class="ctitle">✅ Before You Send</div>
+    <p style="font-size:13px;color:#6B7280;margin-bottom:14px">Please tick all boxes below before sending 👇</p>
+    <div class="chk-item" onclick="tick(0)"><div class="chk-circle" id="chk0">✓</div><div class="chk-text">I have checked my order details above and everything is correct</div></div>
+    <div class="chk-item" onclick="tick(1)"><div class="chk-circle" id="chk1">✓</div><div class="chk-text">I have already sent my payment</div></div>
+    <div class="chk-item" onclick="tick(2)"><div class="chk-circle" id="chk2">✓</div><div class="chk-text">I have my payment screenshot saved and ready to send</div></div>
+    <div class="chk-item" onclick="tick(3)"><div class="chk-circle" id="chk3">✓</div><div class="chk-text">I will send my payment screenshot in Messenger after this</div></div>
+    <div class="warn-box" id="warn-box">⚠️ Please tick all 4 boxes first!</div>
+  </div>
+
+  <!-- How to send proof -->
+  <div class="how-box">
+    <b>📸 How to send your payment screenshot:</b><br>
+    1️⃣ Tap <b>Send My Order</b> below<br>
+    2️⃣ Messenger opens → tap <b>Send</b><br>
+    3️⃣ Tap the 📎 <b>photo/attachment icon</b><br>
+    4️⃣ Choose your <b>payment screenshot</b> from gallery<br>
+    5️⃣ Send it in the <b>same Messenger chat</b> 😊
+  </div>
+
+  <!-- Send button -->
+  <button class="btn-send" onclick="sendOrder()">
+    <svg width="22" height="22" viewBox="0 0 48 48" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <path d="M24 4C12.95 4 4 12.4 4 22.8c0 5.8 2.8 11 7.2 14.5V44l6.6-3.6c1.7.5 3.5.7 5.2.7 11.05 0 20-8.4 20-18.8S35.05 4 24 4zm2 25.3l-5.1-5.4-9.9 5.4 10.9-11.6 5.2 5.4 9.8-5.4-10.9 11.6z"/>
+    </svg>
+    Send My Order to KC GoodDeals
+  </button>
+
+  <div class="send-note">
+    Your order will be copied — then open Messenger to paste and send it 💬
+  </div>
+
+  <div class="fallback">
+    <a href="https://m.me/kcgooddeals" target="_blank">Having trouble? Tap here to open Messenger</a>
+  </div>
+
+  <button class="btn-back" onclick="back(4)">← Back</button>
+  <button class="btn-new" onclick="newOrder()">🔄 Place Another Order</button>
+</div>
+
+<script>
+var D = {
+  name:'', fb:'', phone:'',
+  items:[], zone:'', courier:'',
+  street:'', city:'', province:'', zip:'', landmark:'', lbc:'',
+  payType:'', payMethod:'', ref:''
+};
+var iCount = 0;
+var curStep = 1;
+var chks = [false,false,false,false];
+
+var PAY_INFO = {
+  'GCash':  '📱 <b>GCash</b><br>Number: <b>09XX-XXX-XXXX</b><br>Name: <b>KC GoodDeals</b>',
+  'BDO':    '🏦 <b>BDO Bank Transfer</b><br>Account #: <b>XXXX-XXXX-XXXX</b><br>Name: <b>KC GoodDeals</b>',
+  'BPI':    '🏦 <b>BPI Bank Transfer</b><br>Account #: <b>XXXX-XXXX-XXXX</b><br>Name: <b>KC GoodDeals</b>'
+};
+
+function setProgress(s) {
+  for (var i = 1; i <= 5; i++) {
+    var c = document.getElementById('pc' + i);
+    if (i < s) { c.className = 'pc done'; c.textContent = '✓'; }
+    else if (i === s) { c.className = 'pc active'; c.textContent = i; }
+    else { c.className = 'pc'; c.textContent = i; }
+    if (i < 5) {
+      document.getElementById('pl' + i).className = 'pl' + (i < s ? ' done' : '');
+    }
+  }
+}
+
+function showStep(n) {
+  document.querySelectorAll('.sec').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById('step' + n).classList.add('active');
+  setProgress(n);
+  curStep = n;
+  window.scrollTo(0, 0);
+  if (n === 5) { buildSummary(); }
+}
+
+function validate(s) {
+  if (s === 1) {
+    if (!document.getElementById('f-name').value.trim()) { alert('Please enter your full name.'); return false; }
+    if (!document.getElementById('f-fb').value.trim()) { alert('Please enter your Facebook name.'); return false; }
+  }
+  if (s === 2) {
+    var rows = document.querySelectorAll('.item-box');
+    if (rows.length === 0) { alert('Please add at least one item.'); return false; }
+    var ok = true;
+    rows.forEach(function(r) {
+      var i = r.getAttribute('data-i');
+      if (!document.getElementById('in-' + i).value.trim()) ok = false;
+      if (!document.getElementById('it-' + i).value) ok = false;
+      if (!parseFloat(document.getElementById('ip-' + i).value)) ok = false;
+      if (!parseInt(document.getElementById('iq-' + i).value)) ok = false;
+    });
+    if (!ok) { alert('Please fill in all item details (name, type, qty, price).'); return false; }
+  }
+  if (s === 3) {
+    if (!D.zone) { alert('Please select Metro Manila or Outside Manila.'); return false; }
+    if (D.zone === 'metro') {
+      if (!document.getElementById('metro-courier').value) { alert('Please select your courier.'); return false; }
+      if (!document.getElementById('metro-city').value.trim()) { alert('Please enter your city/area.'); return false; }
+    }
+    if (D.zone === 'prov') {
+      if (!document.getElementById('prov-courier').value) { alert('Please select your courier.'); return false; }
+      if (!document.getElementById('prov-street').value.trim()) { alert('Please enter your street/barangay.'); return false; }
+      if (!document.getElementById('prov-city').value.trim()) { alert('Please enter your city.'); return false; }
+      if (!document.getElementById('prov-prov').value.trim()) { alert('Please enter your province.'); return false; }
+      if (document.getElementById('prov-courier').value === 'LBC – Branch Pick-up' && !document.getElementById('lbc-branch').value.trim()) {
+        alert('Please enter your nearest LBC branch.'); return false;
+      }
+    }
+  }
+  if (s === 4) {
+    if (!D.payType) { alert('Please select Full Payment or 50% Deposit.'); return false; }
+    if (!document.getElementById('pay-method').value) { alert('Please select a payment method.'); return false; }
+    if (!document.getElementById('f-ref').value.trim()) { alert('Please enter your reference number.'); return false; }
+  }
+  return true;
+}
+
+function collect(s) {
+  if (s === 1) {
+    D.name = document.getElementById('f-name').value.trim();
+    D.fb = document.getElementById('f-fb').value.trim();
+    D.phone = document.getElementById('f-phone').value.trim();
+  }
+  if (s === 2) {
+    D.items = [];
+    document.querySelectorAll('.item-box').forEach(function(r) {
+      var i = r.getAttribute('data-i');
+      var name = document.getElementById('in-' + i).value.trim();
+      var type = document.getElementById('it-' + i).value;
+      var qty = parseInt(document.getElementById('iq-' + i).value) || 0;
+      var price = parseFloat(document.getElementById('ip-' + i).value) || 0;
+      if (name && qty && price) D.items.push({name:name, type:type, qty:qty, price:price, sub:qty*price});
+    });
+  }
+  if (s === 3) {
+    if (D.zone === 'metro') {
+      D.courier = document.getElementById('metro-courier').value;
+      D.city = document.getElementById('metro-city').value.trim();
+      D.province = 'Metro Manila';
+    } else if (D.zone === 'prov') {
+      D.courier = document.getElementById('prov-courier').value;
+      D.street = document.getElementById('prov-street').value.trim();
+      D.city = document.getElementById('prov-city').value.trim();
+      D.province = document.getElementById('prov-prov').value.trim();
+      D.zip = document.getElementById('prov-zip').value.trim();
+      D.landmark = document.getElementById('prov-lm').value.trim();
+      D.lbc = document.getElementById('lbc-branch').value.trim();
+    }
+  }
+  if (s === 4) {
+    D.payMethod = document.getElementById('pay-method').value;
+    D.ref = document.getElementById('f-ref').value.trim();
+  }
+}
+
+function next(s) {
+  if (!validate(s)) return;
+  collect(s);
+  showStep(s + 1);
+}
+
+function back(s) {
+  showStep(s);
+}
+
+function addItem() {
+  var i = iCount++;
+  var c = document.getElementById('items-list');
+  var d = document.createElement('div');
+  d.className = 'item-box';
+  d.setAttribute('data-i', i);
+  d.innerHTML = '<button class="rm-btn" onclick="this.closest(\'.item-box\').remove();calcTot()">✕ Remove</button>' +
+    '<div class="fld"><label>Perfume Name <span class="req">*</span></label>' +
+    '<input id="in-' + i + '" placeholder="e.g. Armaf Odyssey Mega 100ml" oninput="calcTot()"></div>' +
+    '<div class="frow">' +
+    '<div class="fld"><label>Type <span class="req">*</span></label>' +
+    '<select id="it-' + i + '" onchange="calcTot()">' +
+    '<option value="">--</option>' +
+    '<option value="On-Hand PH">✅ On-Hand PH</option>' +
+    '<option value="Preorder">📋 Preorder</option>' +
+    '</select></div>' +
+    '<div class="fld"><label>Qty <span class="req">*</span></label>' +
+    '<input id="iq-' + i + '" type="number" value="1" min="1" oninput="calcTot()"></div>' +
+    '</div>' +
+    '<div class="frow">' +
+    '<div class="fld"><label>Price/bottle (₱) <span class="req">*</span></label>' +
+    '<input id="ip-' + i + '" type="number" placeholder="0.00" oninput="calcTot()"></div>' +
+    '<div class="fld"><label>Subtotal (₱)</label>' +
+    '<input id="is-' + i + '" readonly style="background:#f0fdf4;color:#1A6B3C;font-weight:700"></div>' +
+    '</div>';
+  c.appendChild(d);
+}
+
+function calcTot() {
+  var total = 0;
+  document.querySelectorAll('.item-box').forEach(function(r) {
+    var i = r.getAttribute('data-i');
+    var q = parseInt(document.getElementById('iq-' + i).value) || 0;
+    var p = parseFloat(document.getElementById('ip-' + i).value) || 0;
+    var sub = q * p;
+    document.getElementById('is-' + i).value = sub > 0 ? '₱' + sub.toLocaleString() : '';
+    total += sub;
+  });
+  document.getElementById('tot-amt').textContent = '₱' + total.toLocaleString();
+  updateDue();
+}
+
+function setZone(z) {
+  D.zone = z;
+  document.getElementById('ship-mm').className = 'ship-opt' + (z === 'metro' ? ' sel' : '');
+  document.getElementById('ship-prov').className = 'ship-opt' + (z === 'prov' ? ' sel' : '');
+  document.getElementById('metro-card').style.display = z === 'metro' ? 'block' : 'none';
+  document.getElementById('prov-card').style.display = z === 'prov' ? 'block' : 'none';
+}
+
+function toggleLBC() {
+  var v = document.getElementById('prov-courier').value;
+  document.getElementById('lbc-field').style.display = v === 'LBC – Branch Pick-up' ? 'block' : 'none';
+}
+
+function setPayType(t) {
+  D.payType = t;
+  document.getElementById('pp-full').className = 'ppill' + (t === 'full' ? ' sf' : '');
+  document.getElementById('pp-dep').className = 'ppill' + (t === 'dep' ? ' sd' : '');
+  document.getElementById('bal-note').style.display = t === 'dep' ? 'block' : 'none';
+  updateDue();
+}
+
+function updateDue() {
+  var items = [];
+  document.querySelectorAll('.item-box').forEach(function(r) {
+    var i = r.getAttribute('data-i');
+    var q = parseInt(document.getElementById('iq-' + i).value) || 0;
+    var p = parseFloat(document.getElementById('ip-' + i).value) || 0;
+    if (q && p) items.push({sub: q * p});
+  });
+  var tot = items.reduce(function(a, i){ return a + i.sub; }, 0);
+  var due = D.payType === 'dep' ? Math.round(tot * 0.5) : tot;
+  var bal = tot - due;
+  document.getElementById('due-amt').textContent = '₱' + due.toLocaleString();
+  document.getElementById('due-lbl').textContent = D.payType === 'dep' ? '50% DEPOSIT DUE NOW' : 'FULL AMOUNT DUE';
+  document.getElementById('due-note').textContent = D.payType === 'dep' && bal > 0 ? 'Balance ₱' + bal.toLocaleString() + ' — upon arrival in PH' : '';
+}
+
+function showPayInfo() {
+  var m = document.getElementById('pay-method').value;
+  D.payMethod = m;
+  var box = document.getElementById('pay-info-box');
+  if (m) {
+    document.getElementById('pay-info-body').innerHTML = PAY_INFO[m];
+    box.style.display = 'block';
+  } else {
+    box.style.display = 'none';
+  }
+}
+
+function tick(n) {
+  chks[n] = !chks[n];
+  document.getElementById('chk' + n).className = 'chk-circle' + (chks[n] ? ' on' : '');
+  document.getElementById('warn-box').style.display = 'none';
+}
+
+function buildSummary() {
+  collect(1); collect(2); collect(3); collect(4);
+
+  document.getElementById('sum-name').textContent = D.name;
+  document.getElementById('sum-contact').textContent = '💬 ' + D.fb + (D.phone ? ' | 📱 ' + D.phone : '');
+
+  if (D.zone === 'metro') {
+    document.getElementById('sum-delivery').textContent = D.city + ', Metro Manila';
+    document.getElementById('sum-courier').textContent = '🚚 ' + D.courier + ' — you book the rider';
+  } else {
+    var addr = [D.street, D.city, D.province, D.zip].filter(Boolean).join(', ');
+    document.getElementById('sum-delivery').textContent = addr;
+    document.getElementById('sum-courier').textContent = '🚚 ' + D.courier + (D.lbc ? ' | Branch: ' + D.lbc : '') + (D.landmark ? ' | Near: ' + D.landmark : '');
+  }
+
+  var tot = D.items.reduce(function(a, i){ return a + i.sub; }, 0);
+  var due = D.payType === 'dep' ? Math.round(tot * 0.5) : tot;
+  var bal = tot - due;
+
+  var html = '';
+  D.items.forEach(function(item) {
+    html += '<div class="si"><span class="si-n">' + item.name + ' x' + item.qty + '<br>' +
+      '<span class="badge ' + (item.type === 'Preorder' ? 'bo' : 'bg') + '">' + item.type + '</span></span>' +
+      '<span class="si-p">₱' + item.sub.toLocaleString() + '</span></div>';
+  });
+  document.getElementById('sum-items').innerHTML = html;
+
+  document.getElementById('sum-pay').textContent = D.payMethod;
+  document.getElementById('sum-ref').textContent = D.ref;
+
+  var amtHtml = '<span class="badge bt">Total: ₱' + tot.toLocaleString() + '</span> ' +
+    '<span class="badge ' + (D.payType === 'dep' ? 'bo' : 'bg') + '">Paid: ₱' + due.toLocaleString() + '</span>';
+  if (bal > 0) amtHtml += '<br><span class="badge br" style="margin-top:4px;display:inline-block">Balance: ₱' + bal.toLocaleString() + ' — on arrival</span>';
+  document.getElementById('sum-amounts').innerHTML = amtHtml;
+
+  // Update checklist payment label
+  var chk1 = document.querySelectorAll('.chk-text')[1];
+  if (chk1) chk1.textContent = 'I have already sent my payment via ' + (D.payMethod || 'GCash/BDO/BPI');
+}
+
+function sendOrder() {
+  if (!chks[0] || !chks[1] || !chks[2] || !chks[3]) {
+    document.getElementById('warn-box').style.display = 'block';
+    document.getElementById('warn-box').scrollIntoView({behavior:'smooth'});
+    return;
+  }
+
+  collect(1); collect(2); collect(3); collect(4);
+
+  var tot = D.items.reduce(function(a, i){ return a + i.sub; }, 0);
+  var due = D.payType === 'dep' ? Math.round(tot * 0.5) : tot;
+  var bal = tot - due;
+  var hasP = D.items.some(function(i){ return i.type === 'Preorder'; });
+
+  var lines = [];
+  lines.push('🇵🇭 *NEW ORDER — KC GOODDEALS*');
+  lines.push('🌐 www.kcgooddeals.com');
+  lines.push('━━━━━━━━━━━━━━━━━━━━━━━━');
+  lines.push('👤 *CUSTOMER*');
+  lines.push('Name: ' + D.name);
+  lines.push('FB Messenger: ' + D.fb);
+  if (D.phone) lines.push('Contact: ' + D.phone);
+  lines.push('━━━━━━━━━━━━━━━━━━━━━━━━');
+  lines.push('🚚 *DELIVERY*');
+  if (D.zone === 'metro') {
+    lines.push('Area: ' + D.city + ', Metro Manila');
+    lines.push('Courier: ' + D.courier + ' — Customer books rider');
+    lines.push('📌 Please send PIN location after payment confirmation');
+  } else {
+    lines.push('Address: ' + [D.street, D.city, D.province, D.zip].filter(Boolean).join(', '));
+    if (D.landmark) lines.push('Landmark: ' + D.landmark);
+    lines.push('Courier: ' + D.courier);
+    if (D.lbc) lines.push('LBC Branch: ' + D.lbc);
+  }
+  lines.push('━━━━━━━━━━━━━━━━━━━━━━━━');
+  lines.push('🛒 *ITEMS*');
+  D.items.forEach(function(item, n) {
+    lines.push((n+1) + '. ' + item.name + ' x' + item.qty + ' [' + item.type + ']');
+    lines.push('   ₱' + item.price.toLocaleString() + ' x ' + item.qty + ' = ₱' + item.sub.toLocaleString());
+  });
+  lines.push('━━━━━━━━━━━━━━━━━━━━━━━━');
+  lines.push('💰 *Total: ₱' + tot.toLocaleString() + '*');
+  lines.push('💳 *' + (D.payType === 'dep' ? '50% Deposit' : 'Full Payment') + ': ₱' + due.toLocaleString() + '* via ' + D.payMethod);
+  lines.push('🧾 *Ref #: ' + D.ref + '*');
+  if (bal > 0) lines.push('⚠️ *Balance: ₱' + bal.toLocaleString() + '* — upon arrival');
+  if (hasP) lines.push('✈️ Preorder: Est. 1–2 weeks from UAE departure');
+  lines.push('━━━━━━━━━━━━━━━━━━━━━━━━');
+  lines.push('📸 Payment screenshot will be sent in this chat');
+  lines.push('📅 ' + new Date().toLocaleDateString('en-PH', {year:'numeric', month:'long', day:'numeric'}));
+
+  var fullText = lines.join('\n');
+
+  // Copy order text to clipboard
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(fullText).then(function() {
+      showCopiedMsg(fullText);
+    }).catch(function() {
+      fallbackCopy(fullText);
+    });
+  } else {
+    fallbackCopy(fullText);
+  }
+}
+
+function fallbackCopy(text) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  try { document.execCommand('copy'); } catch(e) {}
+  document.body.removeChild(ta);
+  showCopiedMsg(text);
+}
+
+function showCopiedMsg(text) {
+  // Show the success overlay
+  document.getElementById('copied-overlay').style.display = 'flex';
+  // Store text for manual copy button
+  window._orderText = text;
+}
+
+function newOrder() {
+  if (confirm('Start a new order? This will clear the form.')) {
+    location.reload();
+  }
+}
+
+window.onload = function() { addItem(); };
+</script>
+
+<!-- COPIED OVERLAY -->
+<div id="copied-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(0,0,0,.85);z-index:999;flex-direction:column;align-items:center;
+  justify-content:center;padding:24px;">
+  <div style="background:white;border-radius:20px;padding:24px;max-width:360px;width:100%;text-align:center;">
+    <div style="font-size:40px;margin-bottom:12px">✅</div>
+    <h2 style="font-size:18px;font-weight:800;color:#1F4E6B;margin-bottom:8px">Order Ready!</h2>
+    <p style="font-size:13px;color:#6B7280;margin-bottom:20px;line-height:1.6">
+      Your order details have been <b>copied</b>.<br>
+      Now open Messenger and <b>paste</b> it in the KC GoodDeals chat. 😊
+    </p>
+    <a href="https://m.me/kcgooddeals" 
+       style="display:block;width:100%;padding:15px;background:#006AFF;color:white;
+              border-radius:12px;font-size:16px;font-weight:700;text-decoration:none;
+              margin-bottom:10px;">
+      💬 Open KC GoodDeals on Messenger
+    </a>
+    <button onclick="manualCopy()" 
+       style="width:100%;padding:12px;background:#F0F7FF;color:#1F4E6B;border:1.5px solid #1F4E6B;
+              border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;margin-bottom:10px;">
+      📋 Copy Order Again
+    </button>
+    <div style="background:#F0FDF4;border-radius:10px;padding:12px;font-size:12px;color:#166534;line-height:1.8;text-align:left;">
+      <b>📸 Steps:</b><br>
+      1️⃣ Tap <b>Open Messenger</b> above<br>
+      2️⃣ <b>Paste</b> your order (tap & hold → Paste)<br>
+      3️⃣ Tap <b>Send</b><br>
+      4️⃣ Send your <b>payment screenshot</b> in the same chat
+    </div>
+    <button onclick="document.getElementById('copied-overlay').style.display='none'"
+       style="width:100%;padding:10px;background:#f5f5f5;color:#888;border:none;
+              border-radius:10px;font-size:13px;cursor:pointer;margin-top:10px;">
+      ← Go Back
+    </button>
+  </div>
+</div>
+
+<script>
+function manualCopy() {
+  if (window._orderText) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(window._orderText).then(function(){
+        alert('✅ Copied! Now paste it in Messenger.');
+      });
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = window._orderText;
+      ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.focus(); ta.select();
+      try { document.execCommand('copy'); alert('✅ Copied! Now paste it in Messenger.'); } catch(e) {}
+      document.body.removeChild(ta);
+    }
+  }
+}
+</script>
+
+</body>
+</html>
