@@ -4,483 +4,259 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KC GoodDeals | Luxury UAE Perfume Finds</title>
-<meta name="description" content="KC GoodDeals - UAE-licensed online seller offering authentic UAE perfumes with nationwide delivery in the Philippines.">
+<title>KC GoodDeals | Luxury UAE Finds</title>
+<meta name="description" content="KC GoodDeals - UAE-licensed online seller offering authentic UAE perfumes and premium UAE finds with nationwide delivery in the Philippines.">
 
 <style>
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{
-  margin:0;
-  background:#050505;
-  color:#fff;
-  font-family:Arial,Helvetica,sans-serif;
-  line-height:1.6;
-}
+body{margin:0;background:#050505;color:#fff;font-family:Arial,Helvetica,sans-serif;line-height:1.6}
 a{text-decoration:none;color:inherit}
-.wrap{max-width:1150px;margin:auto;padding:0 20px}
+.wrap{max-width:1180px;margin:auto;padding:0 20px}
 
-.luxury-nav{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  z-index:9999;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:22px;
-  padding:15px 18px;
-  background:rgba(0,0,0,.88);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(212,175,55,.25);
-  box-shadow:0 4px 25px rgba(0,0,0,.45);
+.nav{
+position:fixed;top:0;left:0;width:100%;z-index:9999;
+display:flex;justify-content:center;gap:20px;align-items:center;
+padding:14px 18px;background:rgba(0,0,0,.86);
+backdrop-filter:blur(14px);border-bottom:1px solid rgba(212,175,55,.25)
 }
-.luxury-nav a{
-  color:#f5e7a1;
-  font-weight:700;
-  font-size:14px;
-  transition:.3s ease;
-}
-.luxury-nav a:hover{
-  color:#d4af37;
-  text-shadow:0 0 12px rgba(212,175,55,.8);
-  transform:translateY(-1px);
-}
+.nav a{color:#f7e7a6;font-weight:700;font-size:14px;white-space:nowrap}
+.nav a:hover{color:#d4af37;text-shadow:0 0 12px rgba(212,175,55,.8)}
 
 .hero{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  text-align:center;
-  padding-top:95px;
-  background:
-    radial-gradient(circle at top,rgba(212,175,55,.30),transparent 35%),
-    linear-gradient(180deg,#090909,#000);
-  position:relative;
-  overflow:hidden;
+min-height:100vh;display:flex;align-items:center;text-align:center;padding-top:95px;
+background:radial-gradient(circle at top,rgba(212,175,55,.33),transparent 34%),linear-gradient(180deg,#090909,#000);
+position:relative;overflow:hidden
 }
-.hero:before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,.055),transparent);
-  animation:shine 7s infinite;
-}
-@keyframes shine{
-  0%{transform:translateX(-100%)}
-  60%,100%{transform:translateX(100%)}
-}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent,rgba(255,255,255,.06),transparent);animation:shine 7s infinite}
+@keyframes shine{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
 .hero .wrap{position:relative;z-index:2}
-.badge{
-  display:inline-block;
-  border:1px solid rgba(212,175,55,.55);
-  border-radius:999px;
-  padding:9px 16px;
-  color:#f6e7aa;
-  background:rgba(212,175,55,.09);
-  margin-bottom:22px;
-  font-size:14px;
-}
-h1{
-  margin:0;
-  font-size:clamp(48px,9vw,100px);
-  line-height:1;
-  letter-spacing:3px;
-  color:#d4af37;
-  text-shadow:0 0 40px rgba(212,175,55,.25);
-}
-.sub{
-  max-width:780px;
-  margin:22px auto 0;
-  color:#ededed;
-  font-size:20px;
-}
-.buttons{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:13px;
-  margin-top:34px;
-}
-.btn{
-  display:inline-block;
-  padding:14px 24px;
-  min-width:180px;
-  border-radius:999px;
-  font-weight:bold;
-  transition:.25s ease;
-}
+.badge{display:inline-block;border:1px solid rgba(212,175,55,.55);border-radius:999px;padding:9px 16px;color:#f6e7aa;background:rgba(212,175,55,.09);margin-bottom:22px;font-size:14px}
+h1{margin:0;font-size:clamp(48px,9vw,105px);line-height:1;letter-spacing:3px;color:#d4af37;animation:glow 2.8s infinite alternate}
+@keyframes glow{from{text-shadow:0 0 18px rgba(212,175,55,.25)}to{text-shadow:0 0 48px rgba(212,175,55,.7)}}
+.sub{max-width:800px;margin:22px auto 0;color:#ededed;font-size:20px}
+.buttons{display:flex;flex-wrap:wrap;justify-content:center;gap:13px;margin-top:34px}
+.btn{display:inline-block;padding:14px 24px;min-width:180px;border-radius:999px;font-weight:bold;transition:.25s}
 .btn:hover{transform:translateY(-3px)}
-.primary{
-  background:linear-gradient(135deg,#d4af37,#f7e7a6);
-  color:#111;
-}
-.secondary{
-  border:1px solid rgba(212,175,55,.5);
-  color:#f7e7a6;
-  background:rgba(255,255,255,.04);
-}
+.primary{background:linear-gradient(135deg,#d4af37,#f7e7a6);color:#111}
+.secondary{border:1px solid rgba(212,175,55,.5);color:#f7e7a6;background:rgba(255,255,255,.04)}
 
-.ribbon{
-  overflow:hidden;
-  border-top:1px solid rgba(212,175,55,.25);
-  border-bottom:1px solid rgba(212,175,55,.25);
-  background:rgba(212,175,55,.08);
-  white-space:nowrap;
-}
-.ribbon div{
-  display:inline-block;
-  padding:13px 0;
-  color:#f7e7a6;
-  font-weight:bold;
-  animation:move 22s linear infinite;
-}
-@keyframes move{
-  from{transform:translateX(0)}
-  to{transform:translateX(-50%)}
-}
+.ribbon{overflow:hidden;border-top:1px solid rgba(212,175,55,.25);border-bottom:1px solid rgba(212,175,55,.25);background:rgba(212,175,55,.08);white-space:nowrap}
+.ribbon div{display:inline-block;padding:13px 0;color:#f7e7a6;font-weight:bold;animation:move 23s linear infinite}
+@keyframes move{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-section{
-  padding:75px 0;
-  border-top:1px solid rgba(255,255,255,.08);
-}
-h2{
-  text-align:center;
-  font-size:clamp(30px,5vw,48px);
-  margin:0 0 10px;
-  color:#fff;
-}
-.note{
-  max-width:820px;
-  text-align:center;
-  margin:0 auto 35px;
-  color:#cfcfcf;
-}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
-}
-.card{
-  border:1px solid rgba(212,175,55,.25);
-  background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.025));
-  border-radius:24px;
-  padding:27px;
-  text-align:center;
-  box-shadow:0 15px 40px rgba(0,0,0,.28);
-  transition:.25s ease;
-}
-.card:hover{
-  transform:translateY(-5px);
-  border-color:rgba(212,175,55,.55);
-}
-.card strong{
-  color:#f6e7aa;
-  font-size:19px;
-}
-.card p{
-  color:#cfcfcf;
-  margin:8px 0 0;
-}
+section{padding:76px 0;border-top:1px solid rgba(255,255,255,.08)}
+h2{text-align:center;font-size:clamp(30px,5vw,48px);margin:0 0 10px}
+.note{max-width:840px;text-align:center;margin:0 auto 35px;color:#cfcfcf}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{border:1px solid rgba(212,175,55,.25);background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.025));border-radius:24px;padding:27px;text-align:center;box-shadow:0 15px 40px rgba(0,0,0,.28);transition:.25s}
+.card:hover{transform:translateY(-5px);border-color:rgba(212,175,55,.6)}
+.card strong{color:#f6e7aa;font-size:19px}
+.card p{color:#cfcfcf;margin:8px 0 0}
 
-.gallery{
-  columns:3 260px;
-  column-gap:16px;
-}
-.gallery img{
-  width:100%;
-  margin:0 0 16px;
-  border-radius:18px;
-  border:1px solid rgba(212,175,55,.25);
-  box-shadow:0 12px 35px rgba(0,0,0,.5);
-  break-inside:avoid;
-  display:block;
-}
+.gallery{columns:3 260px;column-gap:16px}
+.gallery img{width:100%;margin:0 0 16px;border-radius:18px;border:1px solid rgba(212,175,55,.25);box-shadow:0 12px 35px rgba(0,0,0,.5);break-inside:avoid;display:block}
 
-.locations{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-  justify-content:center;
-}
-.location{
-  border:1px solid rgba(212,175,55,.25);
-  background:rgba(255,255,255,.04);
-  border-radius:999px;
-  padding:10px 16px;
-  color:#f6e7aa;
-}
+.locations{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.location{border:1px solid rgba(212,175,55,.25);background:rgba(255,255,255,.04);border-radius:999px;padding:10px 16px;color:#f6e7aa}
 
-.testimonials{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:16px;
-}
-.quote{
-  border:1px solid rgba(212,175,55,.25);
-  background:rgba(255,255,255,.045);
-  border-radius:20px;
-  padding:22px;
-  color:#eee;
-}
-.quote span{
-  color:#d4af37;
-  font-weight:bold;
-}
+.testimonials{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.quote{border:1px solid rgba(212,175,55,.25);background:rgba(255,255,255,.045);border-radius:20px;padding:22px;color:#eee}
+.quote span{color:#d4af37;font-weight:bold}
 
-.notice{
-  max-width:900px;
-  margin:auto;
-  border:1px solid rgba(212,175,55,.35);
-  background:rgba(212,175,55,.07);
-  border-radius:24px;
-  padding:30px;
-  text-align:center;
-}
+.notice{max-width:900px;margin:auto;border:1px solid rgba(212,175,55,.35);background:rgba(212,175,55,.07);border-radius:24px;padding:30px;text-align:center}
 
-.float-order,.float-msg,.back-top{
-  position:fixed;
-  z-index:99;
-  border-radius:999px;
-  font-weight:bold;
-  box-shadow:0 8px 30px rgba(0,0,0,.45);
-}
-.float-order{
-  left:16px;
-  bottom:18px;
-  padding:13px 16px;
-  background:linear-gradient(135deg,#d4af37,#f7e7a6);
-  color:#111;
-}
-.float-msg{
-  right:16px;
-  bottom:18px;
-  padding:13px 16px;
-  background:#111;
-  border:1px solid rgba(212,175,55,.45);
-  color:#f7e7a6;
-}
-.back-top{
-  right:16px;
-  bottom:76px;
-  padding:10px 13px;
-  background:rgba(0,0,0,.85);
-  border:1px solid rgba(212,175,55,.35);
-  color:#f7e7a6;
-}
+.float-order,.float-msg,.back-top{position:fixed;z-index:99;border-radius:999px;font-weight:bold;box-shadow:0 8px 30px rgba(0,0,0,.45)}
+.float-order{left:16px;bottom:18px;padding:13px 16px;background:linear-gradient(135deg,#d4af37,#f7e7a6);color:#111}
+.float-msg{right:16px;bottom:18px;padding:13px 16px;background:#111;border:1px solid rgba(212,175,55,.45);color:#f7e7a6}
+.back-top{right:16px;bottom:76px;padding:10px 13px;background:rgba(0,0,0,.85);border:1px solid rgba(212,175,55,.35);color:#f7e7a6}
 
-footer{
-  text-align:center;
-  padding:40px 18px 95px;
-  color:#bbb;
-  background:#030303;
-}
-.small{
-  font-size:12px;
-  color:#8e8e8e;
-  max-width:900px;
-  margin:18px auto 0;
-}
+.reveal{opacity:0;transform:translateY(28px);transition:all .8s ease}
+.reveal.show{opacity:1;transform:translateY(0)}
+
+footer{text-align:center;padding:40px 18px 95px;color:#bbb;background:#030303}
+.small{font-size:12px;color:#8e8e8e;max-width:900px;margin:18px auto 0}
 
 @media(max-width:780px){
-  .luxury-nav{
-    overflow-x:auto;
-    justify-content:flex-start;
-    gap:15px;
-    padding:13px 14px;
-  }
-  .luxury-nav a{
-    white-space:nowrap;
-    font-size:13px;
-  }
-  .hero{
-    min-height:auto;
-    padding:105px 0 75px;
-  }
-  .grid,.testimonials{
-    grid-template-columns:1fr;
-  }
-  .btn{
-    width:100%;
-  }
-  .float-order,.float-msg{
-    font-size:13px;
-    padding:11px 13px;
-  }
+.nav{overflow-x:auto;justify-content:flex-start;gap:15px;padding:13px 14px}
+.nav a{font-size:13px}
+.hero{min-height:auto;padding:105px 0 75px}
+.grid,.testimonials{grid-template-columns:1fr}
+.btn{width:100%}
+.float-order,.float-msg{font-size:13px;padding:11px 13px}
 }
 </style>
 </head>
 
 <body id="top">
 
-<nav class="luxury-nav">
-  <a href="#top">🏠 Home</a>
-  <a href="#arrivals">✨ New Arrivals</a>
-  <a href="#onhand">📦 On-Hand</a>
-  <a href="#bestsellers">🔥 Best Sellers</a>
-  <a href="#process">🚚 Process</a>
-  <a href="#reviews">⭐ Reviews</a>
-  <a href="https://m.me/kcgooddeals2020" target="_blank">💬 Message Us</a>
+<nav class="nav">
+<a href="#top">🏠 Home</a>
+<a href="#arrivals">✨ New Arrivals</a>
+<a href="#onhand">📦 On-Hand</a>
+<a href="#bestsellers">🔥 Best Sellers</a>
+<a href="#process">🚚 Process</a>
+<a href="#reviews">⭐ Reviews</a>
+<a href="https://m.me/kcgooddeals2020" target="_blank">💬 Message Us</a>
 </nav>
 
 <header class="hero">
-  <div class="wrap">
-    <div class="badge">🇦🇪 UAE-Licensed Online Seller • Philippines Delivery</div>
-    <h1>KC GOODDEALS</h1>
-    <p class="sub">Luxury UAE fragrance finds, carefully sourced and trusted by perfume lovers across the Philippines.</p>
-    <div class="buttons">
-      <a class="btn primary" href="order.html">🛒 Order Now</a>
-      <a class="btn secondary" href="#onhand">📦 On-Hand Stocks</a>
-      <a class="btn secondary" href="https://m.me/kcgooddeals2020" target="_blank">💬 Message Us</a>
-    </div>
-  </div>
+<div class="wrap">
+<div class="badge">🇦🇪 UAE-Licensed Online Seller • Philippines Delivery</div>
+<h1>KC GOODDEALS</h1>
+<p class="sub">Luxury UAE fragrance finds and premium deals, carefully sourced and trusted by customers across the Philippines.</p>
+<div class="buttons">
+<a class="btn primary" href="order.html">🛒 Order Now</a>
+<a class="btn secondary" href="#onhand">📦 On-Hand Stocks</a>
+<a class="btn secondary" href="https://m.me/kcgooddeals2020" target="_blank">💬 Message Us</a>
+</div>
+</div>
 </header>
 
 <div class="ribbon">
-  <div>🇦🇪 UAE-Licensed Seller &nbsp; • &nbsp; ✈️ Direct UAE Sourcing &nbsp; • &nbsp; 📦 Nationwide PH Delivery &nbsp; • &nbsp; 💯 Authentic Products &nbsp; • &nbsp; 🔒 Secure Ordering &nbsp; • &nbsp; 🇦🇪 UAE-Licensed Seller &nbsp; • &nbsp; ✈️ Direct UAE Sourcing &nbsp; • &nbsp; 📦 Nationwide PH Delivery &nbsp; • &nbsp; 💯 Authentic Products &nbsp; • &nbsp; 🔒 Secure Ordering &nbsp; • &nbsp;</div>
+<div>🇦🇪 UAE-Licensed Seller &nbsp; • &nbsp; ✈️ Direct UAE Sourcing &nbsp; • &nbsp; 📦 Nationwide PH Delivery &nbsp; • &nbsp; 💯 Authentic Products &nbsp; • &nbsp; 🔒 Secure Ordering &nbsp; • &nbsp; 🇦🇪 UAE-Licensed Seller &nbsp; • &nbsp; ✈️ Direct UAE Sourcing &nbsp; • &nbsp; 📦 Nationwide PH Delivery &nbsp; • &nbsp; 💯 Authentic Products &nbsp; • &nbsp; 🔒 Secure Ordering &nbsp; • &nbsp;</div>
 </div>
 
 <section id="arrivals">
-  <div class="wrap">
-    <h2>✨ Just Arrived in Manila</h2>
-    <p class="note">Newly arrived UAE perfume stocks are now being prepared. Please allow 1–2 days for sorting, checking, and dispatch updates.</p>
-    <div class="grid">
-      <div class="card"><strong>📦 Now Sorting</strong><p>Items are checked carefully before release.</p></div>
-      <div class="card"><strong>📸 Photo Before Dispatch</strong><p>We send item photos once ready.</p></div>
-      <div class="card"><strong>🚚 Ready for Booking</strong><p>Metro Manila via Lalamove or GrabExpress. Provincial via J&T or LBC.</p></div>
-    </div>
-  </div>
+<div class="wrap">
+<h2>✨ Just Arrived in Manila</h2>
+<p class="note">Newly arrived UAE stocks are now being prepared. Please allow 1–2 days for sorting, checking, and dispatch updates.</p>
+<div class="grid">
+<div class="card"><strong>📦 Now Sorting</strong><p>Items are checked carefully before release.</p></div>
+<div class="card"><strong>📸 Photo Before Dispatch</strong><p>We send item photos once ready.</p></div>
+<div class="card"><strong>🚚 Ready for Booking</strong><p>Metro Manila via Lalamove or GrabExpress. Provincial via J&T or LBC.</p></div>
+</div>
+</div>
 </section>
 
 <section id="onhand">
-  <div class="wrap">
-    <h2>📦 On-Hand Stocks</h2>
-    <p class="note">Check our latest available perfumes. Stocks may change without prior notice.</p>
-    <div class="buttons">
-      <a class="btn primary" href="https://docs.google.com/spreadsheets/d/1lrdvfu0g999FGA0mrzeAosz1twRXcUGK/edit" target="_blank">📋 View On-Hand List</a>
-      <a class="btn secondary" href="order.html">🛒 Place Order</a>
-    </div>
-  </div>
+<div class="wrap">
+<h2>📦 On-Hand Stocks</h2>
+<p class="note">Check our latest available items. Stocks may change without prior notice.</p>
+<div class="buttons">
+<a class="btn primary" href="https://docs.google.com/spreadsheets/d/1lrdvfu0g999FGA0mrzeAosz1twRXcUGK/edit" target="_blank">📋 View On-Hand List</a>
+<a class="btn secondary" href="order.html">🛒 Place Order</a>
+</div>
+</div>
 </section>
 
 <section id="bestsellers">
-  <div class="wrap">
-    <h2>🔥 Community Favorites</h2>
-    <p class="note">Top-selling fragrance picks loved by KC GoodDeals customers.</p>
-    <div class="grid">
-      <div class="card"><strong>Rasasi Hawas Line Up</strong><p>Fresh, aquatic, and crowd-loved selections.</p></div>
-      <div class="card"><strong>Bujairami Hectic</strong><p>One of our most requested extrait perfumes.</p></div>
-      <div class="card"><strong>Lattafa Khamrah</strong><p>Warm, sweet, and luxurious favorite.</p></div>
-      <div class="card"><strong>Rayhaan Lion</strong><p>Bold, elegant, and impressive scent profile.</p></div>
-      <div class="card"><strong>Afnan Supremacy Collector's Edition</strong><p>Premium pick for fragrance lovers.</p></div>
-      <div class="card"><strong>More UAE Finds</strong><p>Check our on-hand list for latest stocks.</p></div>
-    </div>
-  </div>
+<div class="wrap">
+<h2>🔥 Community Favorites</h2>
+<p class="note">Top-selling fragrance picks loved by KC GoodDeals customers.</p>
+<div class="grid">
+<div class="card"><strong>Rasasi Hawas Line Up</strong><p>Fresh, aquatic, and crowd-loved selections.</p></div>
+<div class="card"><strong>Bujairami Hectic</strong><p>One of our most requested extrait perfumes.</p></div>
+<div class="card"><strong>Lattafa Khamrah</strong><p>Warm, sweet, and luxurious favorite.</p></div>
+<div class="card"><strong>Rayhaan Lion</strong><p>Bold, elegant, and impressive scent profile.</p></div>
+<div class="card"><strong>Afnan Supremacy Collector's Edition</strong><p>Premium pick for fragrance lovers.</p></div>
+<div class="card"><strong>More UAE Finds</strong><p>Check our on-hand list for latest stocks.</p></div>
+</div>
+</div>
 </section>
 
 <section id="process">
-  <div class="wrap">
-    <h2>🚚 Order Process</h2>
-    <p class="note">Simple and secure process for Metro Manila and provincial customers.</p>
-    <div class="grid">
-      <div class="card"><strong>1. Proceed with Payment</strong><p>On-hand items require full payment before dispatch.</p></div>
-      <div class="card"><strong>2. Item Preparation</strong><p>Please allow us time to check, prepare, and pack your order.</p></div>
-      <div class="card"><strong>3. Ready for Dispatch</strong><p>We will send a photo once your item is ready.</p></div>
-      <div class="card"><strong>4. Metro Manila</strong><p>Customer may book Lalamove or GrabExpress. Pin location will be shared.</p></div>
-      <div class="card"><strong>5. Outside Metro Manila</strong><p>J&T or LBC delivery. Tracking number will be shared once collected.</p></div>
-      <div class="card"><strong>6. Proof of Delivery</strong><p>Please send us a photo once received as proof of delivery.</p></div>
-    </div>
-  </div>
+<div class="wrap">
+<h2>🚚 Order Process</h2>
+<p class="note">Simple and secure process for Metro Manila and provincial customers.</p>
+<div class="grid">
+<div class="card"><strong>1. Proceed with Payment</strong><p>On-hand items require full payment before dispatch.</p></div>
+<div class="card"><strong>2. Item Preparation</strong><p>Please allow us time to check, prepare, and pack your order.</p></div>
+<div class="card"><strong>3. Ready for Dispatch</strong><p>We will send a photo once your item is ready.</p></div>
+<div class="card"><strong>4. Metro Manila</strong><p>Customer may book Lalamove or GrabExpress. Pin location will be shared.</p></div>
+<div class="card"><strong>5. Outside Metro Manila</strong><p>J&T or LBC delivery. Tracking number will be shared once collected.</p></div>
+<div class="card"><strong>6. Proof of Delivery</strong><p>Please send us a photo once received as proof of delivery.</p></div>
+</div>
+</div>
 </section>
 
 <section id="delivered">
-  <div class="wrap">
-    <h2>Proof of Delivered Orders</h2>
-    <p class="note">Real delivery proofs from KC GoodDeals customers. Personal details are hidden or blurred for privacy.</p>
-    <div class="gallery">
-      <img src="images/deliveries/IMG_9234.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_9756.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_9757.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_9758.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_9759.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_9760.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_9761.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_9762.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_9763.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_9767.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_9768.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_9770.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_9771.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_9772.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_9773.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_9774.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_9775.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_9779.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_9792.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_9794.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_9795.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_9798.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_7105.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_7108.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_7109.JPG" alt="KC GoodDeals delivered order proof">
-      <img src="images/deliveries/IMG_7110.JPG" alt="KC GoodDeals delivered order proof">
-    </div>
-  </div>
+<div class="wrap">
+<h2>Proof of Delivered Orders</h2>
+<p class="note">Real delivery proofs from KC GoodDeals customers. Personal details are hidden or blurred for privacy.</p>
+<div class="gallery">
+<img src="images/deliveries/IMG_9234.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9756.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9757.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9758.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9759.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9760.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9761.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9762.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9763.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9767.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9768.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9770.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9771.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9772.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9773.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9774.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9775.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9779.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9792.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9794.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9795.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9798.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_7105.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_7108.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_7109.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_7110.JPG" alt="KC GoodDeals delivered order proof">
+</div>
+</div>
 </section>
 
 <section>
-  <div class="wrap">
-    <h2>Why Customers Trust KC GoodDeals</h2>
-    <p class="note">A simple, secure, and trusted perfume shopping experience.</p>
-    <div class="grid">
-      <div class="card"><strong>🇦🇪 UAE-Licensed</strong><p>Operated as a UAE-licensed online seller.</p></div>
-      <div class="card"><strong>💯 Authentic Products</strong><p>Carefully sourced UAE perfume selections.</p></div>
-      <div class="card"><strong>📦 Real Deliveries</strong><p>Actual proof of delivered orders from customers.</p></div>
-      <div class="card"><strong>🚚 Nationwide Shipping</strong><p>Shipping available across the Philippines.</p></div>
-      <div class="card"><strong>🔒 Secure Ordering</strong><p>We never ask for passwords, OTPs, PINs, or card details.</p></div>
-      <div class="card"><strong>❤️ Customer Trust</strong><p>Built through transparent updates and real feedback.</p></div>
-    </div>
-  </div>
+<div class="wrap">
+<h2>Why Customers Trust KC GoodDeals</h2>
+<p class="note">A simple, secure, and trusted shopping experience.</p>
+<div class="grid">
+<div class="card"><strong>🇦🇪 UAE-Licensed</strong><p>Operated as a UAE-licensed online seller.</p></div>
+<div class="card"><strong>💯 Authentic Products</strong><p>Carefully sourced UAE selections.</p></div>
+<div class="card"><strong>📦 Real Deliveries</strong><p>Actual proof of delivered orders from customers.</p></div>
+<div class="card"><strong>🚚 Nationwide Shipping</strong><p>Shipping available across the Philippines.</p></div>
+<div class="card"><strong>🔒 Secure Ordering</strong><p>We never ask for passwords, OTPs, PINs, or card details.</p></div>
+<div class="card"><strong>❤️ Customer Trust</strong><p>Built through transparent updates and real feedback.</p></div>
+</div>
+</div>
 </section>
 
 <section>
-  <div class="wrap">
-    <h2>Recently Delivered To</h2>
-    <p class="note">Selected delivery locations from completed transactions.</p>
-    <div class="locations">
-      <span class="location">📍 Pampanga</span>
-      <span class="location">📍 Bulacan</span>
-      <span class="location">📍 Cebu</span>
-      <span class="location">📍 Davao</span>
-      <span class="location">📍 Batangas</span>
-      <span class="location">📍 Rizal</span>
-      <span class="location">📍 Zamboanga</span>
-    </div>
-  </div>
+<div class="wrap">
+<h2>Recently Delivered To</h2>
+<p class="note">Selected delivery locations from completed transactions.</p>
+<div class="locations">
+<span class="location">📍 Pampanga</span>
+<span class="location">📍 Bulacan</span>
+<span class="location">📍 Cebu</span>
+<span class="location">📍 Davao</span>
+<span class="location">📍 Batangas</span>
+<span class="location">📍 Rizal</span>
+<span class="location">📍 Zamboanga</span>
+</div>
+</div>
 </section>
 
 <section id="reviews">
-  <div class="wrap">
-    <h2>Customer Feedback</h2>
-    <p class="note">Real messages from happy customers.</p>
-    <div class="testimonials">
-      <div class="quote"><span>★★★★★</span><br>“Received po tysm!”</div>
-      <div class="quote"><span>★★★★★</span><br>“Got the perfume po! Thank you very much again!”</div>
-      <div class="quote"><span>★★★★★</span><br>“So excited it to use it! Til next transaction po ulit.”</div>
-      <div class="quote"><span>★★★★★</span><br>“Maganda ang service ninyo.”</div>
-    </div>
-  </div>
+<div class="wrap">
+<h2>Customer Feedback</h2>
+<p class="note">Real messages from happy customers.</p>
+<div class="testimonials">
+<div class="quote"><span>★★★★★</span><br>“Received po tysm!”</div>
+<div class="quote"><span>★★★★★</span><br>“Got the perfume po! Thank you very much again!”</div>
+<div class="quote"><span>★★★★★</span><br>“So excited it to use it! Til next transaction po ulit.”</div>
+<div class="quote"><span>★★★★★</span><br>“Maganda ang service ninyo.”</div>
+</div>
+</div>
 </section>
 
 <section>
-  <div class="wrap">
-    <div class="notice">
-      <h2>🔒 Security & Privacy</h2>
-      <p><strong>KC GoodDeals will never ask for passwords, OTPs, PINs, or bank/card details.</strong></p>
-      <p>Customer information is used only for order processing, delivery, and customer support.</p>
-    </div>
-  </div>
+<div class="wrap">
+<div class="notice">
+<h2>🔒 Security & Privacy</h2>
+<p><strong>KC GoodDeals will never ask for passwords, OTPs, PINs, or bank/card details.</strong></p>
+<p>Customer information is used only for order processing, delivery, and customer support.</p>
+</div>
+</div>
 </section>
 
 <a class="float-order" href="order.html">🛒 Order Now</a>
@@ -488,15 +264,26 @@ footer{
 <a class="back-top" href="#top">⬆️</a>
 
 <footer>
-  <strong>KC GoodDeals</strong><br>
-  UAE-Licensed Online Seller • 100% Authentic UAE Perfumes
-  <div class="small">
-    Please respect our content. Do not take or repost photos from this page without permission.
-  </div>
-  <div class="small">
-    All trademarks, brand names, logos, product names, bottle designs, and related intellectual property belong to their respective rightful owners and are used solely for product identification and informational purposes. Their appearance does not imply affiliation, sponsorship, authorization, or endorsement.
-  </div>
+<strong>KC GoodDeals</strong><br>
+🇦🇪 Licensed in the UAE • Carefully sourced finds • Trusted by customers across the Philippines
+<div class="small">Please respect our content. Do not take or repost photos from this page without permission.</div>
+<div class="small">
+All trademarks, brand names, logos, product names, bottle designs, and related intellectual property belong to their respective rightful owners and are used solely for product identification and informational purposes. Their appearance does not imply affiliation, sponsorship, authorization, or endorsement.
+</div>
 </footer>
+
+<script>
+const reveals=document.querySelectorAll("section,.card,.quote");
+const observer=new IntersectionObserver((entries)=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){entry.target.classList.add("show")}
+});
+},{threshold:0.15});
+reveals.forEach(item=>{
+item.classList.add("reveal");
+observer.observe(item);
+});
+</script>
 
 </body>
 </html>
