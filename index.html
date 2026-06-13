@@ -45,8 +45,9 @@ h2{text-align:center;font-size:clamp(30px,5vw,48px);margin:0 0 10px}
 .card strong{color:#f6e7aa;font-size:19px}
 .card p{color:#cfcfcf;margin:8px 0 0}
 
-.gallery{columns:3 260px;column-gap:16px}
-.gallery img{width:100%;margin:0 0 16px;border-radius:18px;border:1px solid rgba(212,175,55,.25);box-shadow:0 12px 35px rgba(0,0,0,.5);break-inside:avoid;display:block}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:850px;margin:0 auto}
+.gallery img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:16px;border:1px solid rgba(212,175,55,.25);box-shadow:0 8px 20px rgba(0,0,0,.35);transition:.3s}
+.gallery img:hover{transform:scale(1.03);border-color:#d4af37}
 
 .locations{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
 .location{border:1px solid rgba(212,175,55,.25);background:rgba(255,255,255,.04);border-radius:999px;padding:10px 16px;color:#f6e7aa}
@@ -81,6 +82,7 @@ footer strong{color:#d4af37}
 .nav a{font-size:13px}
 .hero{min-height:auto;padding:105px 0 75px}
 .grid,.testimonials{grid-template-columns:1fr}
+.gallery{grid-template-columns:repeat(2,1fr);gap:10px}
 .btn{width:100%}
 .map-box{height:620px}
 .pin small{display:none}
@@ -173,41 +175,6 @@ footer strong{color:#d4af37}
 </div>
 </section>
 
-<section id="delivered">
-<div class="wrap">
-<h2>Proof of Delivered Orders</h2>
-<p class="note">Real delivery proofs from KC GoodDeals customers. Personal details are hidden or blurred for privacy.</p>
-<div class="gallery">
-<img src="images/deliveries/IMG_9234.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_9756.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_9757.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_9758.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_9759.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_9760.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_9761.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_9762.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_9763.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_9767.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_9768.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_9770.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_9771.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_9772.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_9773.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_9774.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_9775.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_9779.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_9792.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_9794.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_9795.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_9798.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_7105.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_7108.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_7109.JPG" alt="KC GoodDeals delivered order proof">
-<img src="images/deliveries/IMG_7110.JPG" alt="KC GoodDeals delivered order proof">
-</div>
-</div>
-</section>
-
 <section>
 <div class="wrap">
 <h2>Why Customers Trust KC GoodDeals</h2>
@@ -220,6 +187,28 @@ footer strong{color:#d4af37}
 <div class="card"><strong>🔒 Secure Ordering</strong><p>We never ask for passwords, OTPs, PINs, or card details.</p></div>
 <div class="card"><strong>❤️ Customer Trust</strong><p>Built through transparent updates and real feedback.</p></div>
 </div>
+</div>
+</section>
+
+<section id="delivered">
+<div class="wrap">
+<h2>📦 Proof of Delivered Orders</h2>
+<p class="note">Real customer deliveries from across the Philippines. Personal information is hidden or blurred for privacy.</p>
+
+<div class="gallery">
+<img src="images/deliveries/IMG_9234.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9756.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9763.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9774.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_9792.JPG" alt="KC GoodDeals delivered order proof">
+<img src="images/deliveries/IMG_7108.JPG" alt="KC GoodDeals delivered order proof">
+</div>
+
+<div style="text-align:center;margin-top:30px;">
+<p style="font-size:20px;font-weight:bold;color:#d4af37;margin-bottom:8px;">🤍 Hundreds of successful deliveries across Metro Manila & nationwide</p>
+<p style="color:#bdbdbd;">Thank you for trusting KC GoodDeals.</p>
+</div>
+
 </div>
 </section>
 
